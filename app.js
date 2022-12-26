@@ -22,6 +22,10 @@ exports.handler = async (event) => {
           }
         }
       } = event;
+
+      if (!Key?.startsWith("original/")) {
+        continue;
+      }
   
       const {
         Body
@@ -37,7 +41,7 @@ exports.handler = async (event) => {
 
       await s3.putObject({
         Bucket,
-        Key,
+        Key: Key.replace(/^original/, "resized"),
         Body: resizedImage
       }).promise();
     }
