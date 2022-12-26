@@ -30,11 +30,11 @@ exports.handler = async (event) => {
         Key
       }).promise();
 
-      const resizedImage = sharp(Body)
+      const resizedImage = await sharp(Body)
         .resize(100, 100)
         .jpeg()
         .toBuffer();
-  
+
       await s3.putObject({
         Bucket,
         Key,
